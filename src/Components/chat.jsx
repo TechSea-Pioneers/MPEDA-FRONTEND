@@ -12,7 +12,7 @@ import {
 import axios from 'axios';
 
 const Chatbot = () => {
-
+  const fileInputRef = useRef(null);
   const [usermessage, setUsermessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([
@@ -22,7 +22,24 @@ const Chatbot = () => {
     },
   ]);
   const [history, setHistory] = useState(['']);
-  const endpoint = process.env.REACT_APP_BACKEND_URL;
+  const [chatApi, setChatApi] = useState('');
+  const endpoint = chatApi;
+
+  const handleFileUpload = async () => {
+    const formData = new FormData();
+    formData.append("file", fileInputRef.current.files[0]);
+
+    try {
+      const response = await axios.post(endpoint + "/uploadfile/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("File uploaded:", response.data);
+    } catch (error) {
+      console.log("File upload failed:", error);
+    }
+  };
 
   const handleSendMessage = async () => {
     if (usermessage === '') {
@@ -97,6 +114,30 @@ const Chatbot = () => {
           {loading ? <Spinner /> : 'Send'}
         </Button>
       </Box>
+      <Box display="flex" width="100%" maxW="md" mt={4}>
+        <Input
+          flex={1}
+          value={chatApi}
+          onChange={(e) => setChatApi(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && setChatApi(e.target.value)}
+          placeholder="Enter chat api..."
+        />
+        <Button ml={2} colorScheme="blue" >
+          Send
+        </Button>
+      </Box>
+      <Box>
+        <Text>
+          {chatApi}
+        </Text>
+      </Box>
+      <Box mt={4}>
+        <input ref={fileInputRef} type="file" />
+        <Button ml={2} onClick={handleFileUpload} colorScheme="teal">
+          Upload File
+        </Button>
+      </Box>
+
     </Container>
   );
 };
