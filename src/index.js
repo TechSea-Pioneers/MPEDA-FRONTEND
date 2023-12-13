@@ -13,6 +13,7 @@ import {
 import UserDashboard from './Components/UserDashboard';
 import Home from './Components/Home';
 import AdminDashboard from './Components/AdminDashboard';
+import NewPassword from './Components/Recovery/NewPassword';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path:"/admin",
     element:<AdminDashboard/>
+  },
+  {
+    path:"/recover/:token",
+    element:<NewPassword/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
