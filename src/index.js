@@ -2,27 +2,38 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { extendTheme, ChakraProvider } from '@chakra-ui/react'
-
-// 2. Extend the theme to include custom colors, fonts, etc
-const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import UserDashboard from './Components/UserDashboard';
+import Home from './Components/Home';
+import AdminDashboard from './Components/AdminDashboard';
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
   },
-}
-
-const theme = extendTheme({ colors })
+  {
+    path:"/home",
+    element:<Home/>
+  },
+  {
+    path:"/dashboard",
+    element:<UserDashboard/>
+  },
+  {
+    path:"/admin",
+    element:<AdminDashboard/>
+  }
+]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ChakraProvider theme={theme}>
-  <App />
-</ChakraProvider>
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
