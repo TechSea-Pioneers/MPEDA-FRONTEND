@@ -6,7 +6,7 @@ function RecoveryPage() {
     const [alert, setAlert] = useState(0);
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
-    const recoverPassword = ()=>{
+    const recoverPassword = async ()=>{
         setLoading(true);
         fetch(process.env.REACT_APP_BASE_URL + "/user/recovery", {
             method:"POST",
@@ -16,12 +16,13 @@ function RecoveryPage() {
             body: JSON.stringify({
                 "email":email
             })}).then(res=>res.json()).then(data=>{
-                setLoading(false);
                 setAlert(data.success);
                 setMessage(data.message);
+                setLoading(false);
             })
-            setLoading(false);
-        }
+        setLoading(false);
+    }
+
   return (
     <Stack gap={4}>
         <Typography variant="h5" sx={{fontFamily:"Montserrat"}}>

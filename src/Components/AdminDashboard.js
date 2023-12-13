@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography, useMediaQuery } from '@mui/material';
+import { Alert, Button, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography, useMediaQuery } from '@mui/material';
 import ChatBox from './ChatBox';
 import { useNavigate } from 'react-router-dom';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -8,6 +8,8 @@ function AdminDashboard() {
   const matches = useMediaQuery('(min-width:600px)')
   const fileInputRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(0);
+  const [message, setMessage] = useState("");
   const [apitype, setApitype] = useState('openai');
   // const [apikey, setApikey] = useState("")
   // const [file, setFile] = useState();
@@ -81,8 +83,10 @@ function AdminDashboard() {
             <Typography sx={{ textAlign: "left" }} p={4}>PDF Files</Typography>
           </Stack>
         </Stack>
+        {alert === 0 ? "" : <Alert severity={alert ? "success" : 'error'}>{message}</Alert>}
         <Stack>
         </Stack>
+        
       </Stack>
       <Stack className="footer">
         <Typography p={2} variant="subtitle1" sx={{ color: "white", fontFamily: "Poppins", fontweight: "600", letterSpacing: "2px" }}>Made with ❤️ by TechSeaPioneers</Typography>

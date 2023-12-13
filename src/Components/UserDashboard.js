@@ -25,9 +25,6 @@ function UserDashboard() {
             Schedule a meeting with exporters
           </Button>
           <Button variant="contained">
-            Incoming Messages
-          </Button>
-          <Button variant="contained">
             List of Exporters
           </Button>
           <Button endIcon={<LogoutIcon/>}onClick={()=>{localStorage.clear();navigate('/')}}variant="contained">
