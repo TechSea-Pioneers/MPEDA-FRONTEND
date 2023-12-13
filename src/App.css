@@ -86,3 +86,15 @@
   border-radius: 0.2rem;
   font-family:'Montserrat'
 }
+.table-data{
+  border:1px solid black;
+}
+.black-row{
+  color:white !important;
+  font-weight: 800 !important;
+  background-color: orange !important;
+}
+.pdf-block{
+  max-width:300px !important;
+  height:auto;
+}

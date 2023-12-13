@@ -10,7 +10,7 @@ function ChatBox() {
   return (
     <Stack height="fit-content" width="fit-content" alignItems="center" justifyContent="center" gap={2} p={4}>
       {!showConversation && <>
-        <img width="50%" height="fit-content"src="https://jungleworks.com/wp-content/uploads/2021/04/1_9I6EIL5NG20A8se5afVmOg.gif" alt="" />
+        <img width="40%" height="fit-content"src="https://jungleworks.com/wp-content/uploads/2021/04/1_9I6EIL5NG20A8se5afVmOg.gif" alt="" />
         <TypeAnimation
           sequence={features}
           wrapper="span"

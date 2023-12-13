@@ -50,7 +50,7 @@ function Conversation() {
     }
 
     return (
-        <Stack className="conv" gap={2} width="45vw" height="47vh" p={3} pb={1}>
+        <Stack className="conv" gap={2} width="42vw" height="43vh" p={3} pb={1}>
             <Typography variant="h5" sx={{ fontWeight: 800, fontFamily: "Poppins" }}>Get a Free Trial!</Typography>
             {
                 messages.map((element, index) => {

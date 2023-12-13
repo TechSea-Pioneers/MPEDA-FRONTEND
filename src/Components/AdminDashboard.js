@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Alert, Button, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography, useMediaQuery } from '@mui/material';
-import ChatBox from './ChatBox';
 import { useNavigate } from 'react-router-dom';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-
+import Conversation from './Conversation';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 function AdminDashboard() {
   const matches = useMediaQuery('(min-width:600px)')
   const fileInputRef = useRef(null);
@@ -27,12 +27,16 @@ function AdminDashboard() {
         body:formData
       });
       console.log("File uploaded:", response.data);
+      setAlert(true);
+      setMessage("File Uploaded Successfully");
       setLoading(false);
     } catch (error) {
       console.log("File upload failed:", error);
+
       setLoading(false);
     }
   };
+  const pdfs = ['Web_Details.pdf','SeaFood_Scraping.pdf','Reference sites for database for the User.pdf','Question often ask in the MPEDA.pdf','PRIME_2.pdf','MEPDA_EXPORTER_1.pdf','Indian_Fisheries.pdf','Indian_Fisheries_General.pdf','Exporters.pdf','About_MPEDA_Data.pdf']
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -69,18 +73,29 @@ function AdminDashboard() {
               <TextField sx={{ width: "60%" }} label="LLM API" />
             </Stack>
           </Stack>
-          <ChatBox />
+          <Conversation />
         </Stack>
         <Stack gap={3} alignItems="center" justifyContent="center" width="100%">
             <Typography sx={{fontWeight:800}} variant="h3">Admins Only</Typography>
-          <Stack width="100%" direction="row">
+          <Stack width="100%" direction="row" alignItems="center" justifyContent="center" gap={4}>
             <Button component="label" disabled={loading} variant="contained" startIcon={<CloudUploadIcon />} onClick={handleFileUpload}>
               {loading?"Loading":"Upload file"}
             </Button>
             <input ref={fileInputRef} type="file"/>
           </Stack>
-          <Stack width="100%" sx={{ border: "2px solid black", borderRadius: "1rem", height: "50vh" }}>
-            <Typography sx={{ textAlign: "left" }} p={4}>PDF Files</Typography>
+          <Stack width="100%" sx={{ border: "2px solid black", borderRadius: "1rem", height: "65vh" }}>
+            <Stack flexWrap="wrap" p={4} direction="row" gap={4} sx={{overflow:"scroll"}}>
+              {pdfs.map((element)=>{
+                return (
+                  <Stack sx={{border:"2px solid black", borderRadius:"1.2rem", padding:"1.2rem"}}>
+                    <PictureAsPdfIcon sx={{fontSize:"8rem"}}/>
+                    <Stack  class="pdf-block" sx={{fontSize:"0.7rem"}}>
+                      {element}
+                      </Stack>
+                  </Stack>
+                )
+              })}
+            </Stack>
           </Stack>
         </Stack>
         {alert === 0 ? "" : <Alert severity={alert ? "success" : 'error'}>{message}</Alert>}
