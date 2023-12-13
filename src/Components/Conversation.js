@@ -4,8 +4,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import MpedaLogo from './svgs/MpedaLogo';
 import { TypeAnimation } from 'react-type-animation';
-function Conversation() {
-    const apiurl = process.env.REACT_APP_API_URL
+function Conversation({url, key}) {
+    const apiurl = url?url:process.env.REACT_APP_API_URL
     const [messages, setMessages] = useState([
         { "text": "Hello! How may I help you today?", "sender": "bot" }
     ])

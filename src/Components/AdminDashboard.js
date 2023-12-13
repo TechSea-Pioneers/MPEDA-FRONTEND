@@ -13,7 +13,7 @@ function AdminDashboard() {
   const [apitype, setApitype] = useState('openai');
   // const [apikey, setApikey] = useState("")
   // const [file, setFile] = useState();
-  const apiurl = process.env.REACT_APP_API_URL 
+  const apiurl = process.env.REACT_APP_API_URL
   const handleApitype = (event, api) => {
     setApitype(api);
   };
@@ -64,14 +64,14 @@ function AdminDashboard() {
                 </ToggleButton>
               </ToggleButtonGroup>
             </Stack>
-            <Stack width="100%" direction="row" justifyContent="center" alignItems="center" gap={4}>
+            {apitype==="openai" && <Stack width="100%" direction="row" justifyContent="center" alignItems="center" gap={4}>
               <Typography sx={{ width: '50%' }}>Enter your API KEY</Typography>
-              <TextField sx={{ width: "60%" }} label="API KEY" />
-            </Stack>
-            <Stack width="100%" direction="row" justifyContent="center" alignItems="center" gap={4}>
+              <TextField required sx={{ width: "60%" }} label="API KEY" />
+            </Stack>}
+            {apitype==="llm" && <Stack width="100%" direction="row" justifyContent="center" alignItems="center" gap={4}>
               <Typography sx={{ width: '50%' }}>Custom LLM API</Typography>
-              <TextField sx={{ width: "60%" }} label="LLM API" />
-            </Stack>
+              <TextField required sx={{ width: "60%" }} label="LLM API" />
+            </Stack>}
           </Stack>
           <Conversation />
         </Stack>
@@ -88,8 +88,8 @@ function AdminDashboard() {
               {pdfs.map((element)=>{
                 return (
                   <Stack sx={{border:"2px solid black", borderRadius:"1.2rem", padding:"1.2rem"}}>
-                    <PictureAsPdfIcon sx={{fontSize:"8rem"}}/>
-                    <Stack  class="pdf-block" sx={{fontSize:"0.7rem"}}>
+                    <PictureAsPdfIcon sx={{fontSize:"6rem"}}/>
+                    <Stack  class="pdf-block" sx={{fontSize:"0.8rem"}}>
                       {element}
                       </Stack>
                   </Stack>
